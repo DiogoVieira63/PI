@@ -94,10 +94,8 @@ char *mystrcat(char s1[], const char s2[]) {
     return result;
 }
 
-char *mystrcpy (char *dest, char source[]){
-    int len = strlen (source);
-    for (int i = 0; i < len; i++)dest[i] = source[i];
-    return dest;
+char *mystrcpy (char *dest, char *source){
+    while (*dest++ = *source++);
 }
 
 int mystrcmp (char s1[], char s2[]){
@@ -607,5 +605,10 @@ int vizinhos (Posicao p, Posicao pos[], int N){
 }
 
 int main (){
+    char *name = "Diogo";
+    char *other = malloc (sizeof (char) * 10);
+    mystrcpy (other,name);
+    other = mystrcat(name,other);
+    printf ("%s\n%s\n",other,name);
 
 }
