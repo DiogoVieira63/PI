@@ -75,6 +75,7 @@ void imprimeTurma (int ind[], Aluno t[], int N){
         printf ("nome: %s | numero: %d | nota %d\n",temp[i].nome, temp[i].numero,nota(temp[i]));
 }
 
+
 int main (){
     Aluno Turma1 [4] = {{4444, "Diogo", {2,2,1,2,2,2}, 15.8}
                       ,{2222, "Joana", {2,2,2,1,0,0}, 14.5}
