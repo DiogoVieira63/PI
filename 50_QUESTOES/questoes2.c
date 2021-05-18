@@ -323,9 +323,9 @@ void mirror (ABin *tree){
 
 void inorderAux (ABin tree, LInt *l){
     if (!tree)return;
-    inorder (tree->esq,l);
+    inorderAux (tree->esq,l);
     appendL (l,tree-> valor);
-    inorder (tree->dir,l);
+    inorderAux (tree->dir,l);
 
 }
 
@@ -563,7 +563,9 @@ void doNodo (ABin *tree, int valor){
 
 
 int main (){
-    LInt l = NULL;
+    LInt l = cria();
+    imprimeL (l);
+    /*
     l = newLInt (5,l);
     l = newLInt (4,l);
     l = newLInt (3,l);
@@ -574,11 +576,14 @@ int main (){
     //imprimeL (result);
     //imprimeL (l);
     //printf ("%d\n",maximo(l));
+    */
     ABin tree;
     doNodo (&tree,1);
     doNodo (&tree->dir,3);
     doNodo (&tree->esq,2);
+    /*
     LInt result = NULL;
     preorder (tree,&result);
     imprimeL (result);
+    */
 }
