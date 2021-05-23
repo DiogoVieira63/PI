@@ -173,7 +173,6 @@ int removeMaiorL (LInt *l){
     }
     *lMaior = (*lMaior)->prox;
     return maior;
-} return numMaior;
 }
 
 void init (LInt *l){
