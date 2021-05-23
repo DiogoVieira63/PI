@@ -151,7 +151,7 @@ int removeAll (LInt *l, int x){
             *l1 = (*l1)->prox;
             count++;
         }
-        else l1 = &((*l1)->prox)
+        else l1 = &((*l1)->prox);
     }
     return count;
 }
