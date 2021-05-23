@@ -145,15 +145,13 @@ LInt parteAmeio (LInt *l){
 }
 
 int removeAll (LInt *l, int x){
-    LInt ant = *l;
     int count = 0;
-    for (LInt l1 = *l; l1; l1 = l1->prox){
-        if (l1->valor == x){
-            if (*l != l1)ant->prox = l1->prox;
-            else *l = l1->prox;
+    for (LInt *l1 =l; *l1; ){
+        if ((*l1)->valor == x){
+            *l1 = (*l1)->prox;
             count++;
         }
-        else ant = l1;
+        else l1 = &((*l1)->prox)
     }
     return count;
 }
