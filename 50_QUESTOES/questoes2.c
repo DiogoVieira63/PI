@@ -8,6 +8,7 @@ typedef struct ligada {
 } *LInt;
 
 
+
 int length (LInt l){
     int count = 0;
     for (LInt l1 = l; l1; l1 = l1->prox) count++;
@@ -71,6 +72,31 @@ void insertOrd (LInt *l, int valor){
     } 
     ant->prox= new;
     new->prox = prox;
+}
+
+int removeOneOrd (LInt *l, int n){
+    LInt *l1;
+    for ( l1 = l; *l1; l1 = &((*l1)->prox)){
+        if ((*l1)->valor == n){
+            *l1 = (*l1)->prox; 
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void appendL (LInt *l, int x);
+
+
+void merge (LInt *r, LInt a, LInt b){
+    *r = NULL;
+    LInt l1;
+    for (l1 = a;l1; l1 = l1->prox){
+        appendL (r,l1->valor);
+    }
+    for ( l1 = b; l1; l1 = l1->prox){
+        insertOrd (r,l1->valor);
+    }
 }
 
 void splitQS (LInt l, int x, LInt *mx, LInt *Mx){
@@ -139,19 +165,17 @@ int removeDups (LInt *l){
 
 
 int removeMaiorL (LInt *l){
-    LInt ant_maior = *l, ant = *l,maior = *l;
-    int numMaior =  (*l)->valor;
-    for (LInt l1 = *l; l1; l1 = l1->prox){
-        if (l1->valor > numMaior){
-            maior = l1;
-            ant_maior = ant;
-            numMaior = l1->valor;
-             }
-        ant = l1;
+    int maior = (*l)->valor;
+    LInt *lMaior = l, *l1;
+    for (l1 = &((*l)->prox); *l1; l1 = &((*l1)->prox)){
+        if ((*l1)->valor > maior){
+            maior = (*l1)->valor;
+            lMaior = l1;
+        }
     }
-    if (*l == maior) *l = (*l)->prox;
-    else ant_maior->prox = maior->prox;
-    return numMaior;
+    *lMaior = (*lMaior)->prox;
+    return maior;
+} return numMaior;
 }
 
 void init (LInt *l){
@@ -255,6 +279,7 @@ LInt somasAcL (LInt l){
     LInt new = NULL;
     for (LInt l1 = l; l1; l1 = l1->prox)
         appendL (&new,soma+=l1->valor);
+    return new;
 }
 
 void remreps (LInt l){
@@ -459,6 +484,8 @@ int somaTotal (ABin tree){
     return tree->valor + somaTotal (tree->dir) + somaTotal (tree->esq);
 }
 
+void doNodo (ABin *tree, int valor);
+
 ABin somasAcA (ABin tree){
     if (!tree)return NULL;
     ABin new;
@@ -509,8 +536,8 @@ int lookupAB (ABin tree, int x){
 int depthOrdAux (ABin tree, int x){
     if (!tree) return 0;
     if (tree->valor == x) return 1;
-    if (x > tree->valor) return 1 + depthOrd (tree->dir,x);
-    else return 1 + depthOrd (tree->esq,x);
+    if (x > tree->valor) return 1 + depthOrdAux (tree->dir,x);
+    else return 1 + depthOrdAux (tree->esq,x);
 }
 
 int depthOrd (ABin tree, int x){
@@ -563,8 +590,6 @@ void doNodo (ABin *tree, int valor){
 
 
 int main (){
-    LInt l = cria();
-    imprimeL (l);
     /*
     l = newLInt (5,l);
     l = newLInt (4,l);
