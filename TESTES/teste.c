@@ -94,14 +94,14 @@ int freeAB (ABin a){
 
 void caminho (ABin a){
     int array[100], N = 0;
-    while (a->pai)
+    while (a)
     {
         ABin ant = a;
         a = a->pai;
         if (ant == a->dir) array[N++] = 0; 
         else array[N++] = 1;
     }
-    for (int i = 0; i < N;i++){
+    for (int i = N - 1; i >= 0;i--){
         if (array[i] == 0)printf ("dir\n"); 
         else printf ("esq\n");
     }
